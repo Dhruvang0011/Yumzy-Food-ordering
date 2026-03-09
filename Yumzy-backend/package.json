@@ -1,7 +1,8 @@
 {
   "scripts": {
-    "dev": "nodemon"
-  },
+  "start": "node src/app.js",
+  "dev": "nodemon src/app.js"
+},
   "dependencies": {
     "@reduxjs/toolkit": "^2.11.2",
     "axios": "^1.13.5",
