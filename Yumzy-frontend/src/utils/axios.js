@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "http://localhost:2411/api", // your backend
+  baseURL: "https://yumzy-food-ordering.onrender.com/api", // your backend
   withCredentials: true, // VERY IMPORTANT
 });
 
