@@ -200,7 +200,6 @@ const OwnerDashboard = () => {
           {!restaurant.isApproved && (
             <div
               className="fade-up flex items-center gap-3 px-4 py-3.5 rounded-xl mb-7 text-sm font-semibold
-                bg-yellow-50 dark:bg-[#1f1500]
                 border border-yellow-200 dark:border-yellow-900/60
                 text-yellow-700 dark:text-yellow-400"
               style={{ animationDelay: "40ms" }}

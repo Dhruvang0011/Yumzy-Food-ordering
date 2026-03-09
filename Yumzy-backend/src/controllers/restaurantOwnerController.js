@@ -17,14 +17,15 @@ const getRestaurant = async(req,res) => {
 
 // 🔹 Create Restaurant (Restaurant Owner Only)
 const createRestaurant = async (req, res) => {
-  try {
-    const userHasRestaurent = await Restaurant.findOne({
-    owner: req.user.id
+try {
+
+    const userHasRestaurant = await Restaurant.findOne({
+      owner: req.user.id
     });
 
-    if (userHasRestaurent) {
+    if (userHasRestaurant) {
       return res.status(400).json({
-      message: "You already have one restaurant."
+        message: "You already have one restaurant."
       });
     }
 
@@ -33,13 +34,22 @@ const createRestaurant = async (req, res) => {
       owner: req.user.id
     });
 
+    // 🔥 Update user with restaurant ID
+    await User.findByIdAndUpdate(
+      req.user.id,
+      { restaurant: restaurant._id }
+    );
+
     res.status(201).json({
       message: "Restaurant created",
       restaurant
     });
 
   } catch (error) {
-    res.status(500).json({ message: "Failed to create restaurant", error });
+    res.status(500).json({
+      message: "Failed to create restaurant",
+      error
+    });
   }
 };
 
