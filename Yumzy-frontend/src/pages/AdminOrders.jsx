@@ -105,14 +105,14 @@ const AdminOrders = () => {
       `}</style>
 
       <div className="ao-root min-h-screen transition-colors duration-300">
-        <div className="max-w-[1300px] mx-auto px-4 sm:px-6 py-8 sm:py-10">
+        <div className="max-w-[1300px] mx-auto px-4 sm:px-8 py-8 sm:py-10">
           {/* ── Header ── */}
           <div className="mb-7 fade-up">
             <p className="text-xs font-bold uppercase tracking-widest text-[#ff6b6b] mb-1">
               Admin Panel
             </p>
             <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3">
-              <h1 className="ao-playfair text-2xl sm:text-3xl font-black m-0">
+              <h1 className="ao-playfair text-2xl sm:text-3xl font-black m-0 dark:text-white">
                 Orders
               </h1>
               <span className="text-xs font-semibold text-gray-400 dark:text-gray-600">

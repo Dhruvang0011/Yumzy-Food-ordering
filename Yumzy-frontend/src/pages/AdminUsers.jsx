@@ -95,7 +95,7 @@ const AdminUsers = () => {
       `}</style>
 
       <div className="au-root min-h-screen transition-colors duration-300 ">
-        <div className="max-w-[1300px] mx-auto px-4 sm:px-6 py-8 sm:py-10">
+        <div className="max-w-[1300px] mx-auto px-4 sm:px-8 py-8 sm:py-10">
           {/* ── Header ── */}
           <div className="mb-7 fade-up">
             <p className="text-xs font-bold uppercase tracking-widest text-[#ff6b6b] mb-1">
