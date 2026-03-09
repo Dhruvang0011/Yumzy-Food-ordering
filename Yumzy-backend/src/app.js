@@ -7,7 +7,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: ["http://localhost:5173","https://yumzy-food-ordering.vercel.app/"],
+    origin: "https://yumzy-food-ordering.vercel.app/",
     credentials: true,
   })
 );
