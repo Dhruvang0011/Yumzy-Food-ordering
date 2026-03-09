@@ -480,16 +480,12 @@ const Navbar = () => {
           </div>
         </div>
 
-        {/* ── Mobile Drawer (inside mobileRef so outside-click works) ── */}
+        {/* ── Mobile Drawer ── */}
         {mobileOpen && (
           <div
             className="md:hidden navbar-root drop-in"
             style={{
-              position: "absolute",
-              top: scrolled ? "calc(100% - 8px)" : "calc(100% - 8px)",
-              left: "0",
-              right: "0",
-              zIndex: 49,
+              marginTop: "8px",
               borderRadius: "16px",
               padding: "12px 16px",
               background: nb.dropBg,
@@ -497,7 +493,6 @@ const Navbar = () => {
               WebkitBackdropFilter: "blur(32px) saturate(180%)",
               border: `1.5px solid ${nb.dropBorder}`,
               boxShadow: nb.dropShadow,
-              marginTop: "8px",
             }}
           >
             {/* User / guest nav */}
@@ -525,6 +520,7 @@ const Navbar = () => {
               <>
                 <MobileNavLink
                   to="/owner"
+                  end
                   dark={dark}
                   onClick={() => setMobileOpen(false)}
                 >
@@ -559,6 +555,7 @@ const Navbar = () => {
               <>
                 <MobileNavLink
                   to="/admin/dashboard"
+                  end
                   dark={dark}
                   onClick={() => setMobileOpen(false)}
                 >
@@ -642,9 +639,10 @@ const Navbar = () => {
   );
 };
 
-const MobileNavLink = ({ to, dark, onClick, children }) => (
+const MobileNavLink = ({ to, end, dark, onClick, children }) => (
   <NavLink
     to={to}
+    end={end}
     onClick={onClick}
     style={({ isActive }) => ({
       display: "flex",
