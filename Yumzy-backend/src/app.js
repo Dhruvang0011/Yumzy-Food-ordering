@@ -9,7 +9,7 @@ app.use(
   cors({
     origin: "https://yumzy-food-ordering.vercel.app",
     credentials: true,
-    methods: ["GET", "POST", "PUT", "DELETE"],
+    methods: ["GET", "POST", "PUT", "DELETE","PATCH"],
   })
 );
 app.options("*", cors());
