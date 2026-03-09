@@ -7,10 +7,12 @@ const app = express();
 
 app.use(
   cors({
-    origin: "https://yumzy-food-ordering.vercel.app/",
+    origin: "https://yumzy-food-ordering.vercel.app",
     credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE"],
   })
 );
+app.options("*", cors());
 app.use(express.json())
 app.use(cookieParser());
 
