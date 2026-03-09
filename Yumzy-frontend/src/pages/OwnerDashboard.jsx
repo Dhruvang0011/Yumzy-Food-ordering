@@ -108,7 +108,7 @@ const OwnerDashboard = () => {
       <>
         <style>{`@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@700;900&display=swap');`}</style>
         <div
-          className="min-h-screen flex items-center justify-center bg-[#f5f5f5] dark:bg-[#1a0f0c] px-4"
+          className="min-h-screen flex items-center justify-center px-4"
           style={{ fontFamily: "'DM Sans', sans-serif" }}
         >
           <div className="max-w-md w-full text-center">
@@ -200,6 +200,7 @@ const OwnerDashboard = () => {
           {!restaurant.isApproved && (
             <div
               className="fade-up flex items-center gap-3 px-4 py-3.5 rounded-xl mb-7 text-sm font-semibold
+                bg-yellow-50 dark:bg-[#1f1500]
                 border border-yellow-200 dark:border-yellow-900/60
                 text-yellow-700 dark:text-yellow-400"
               style={{ animationDelay: "40ms" }}
