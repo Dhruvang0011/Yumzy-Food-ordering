@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>React App</title>
     <link href="./src/index.css" type="text/css" rel="stylesheet" />
+    <script>
+      if (localStorage.getItem("yumzy-theme") === "dark") {
+        document.documentElement.classList.add("dark");
+      }
+    </script>
   </head>
 
   <body class="relative min-h-screen font-sans antialiased">

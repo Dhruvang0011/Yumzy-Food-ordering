@@ -123,37 +123,45 @@ const Navbar = () => {
         }
 
         .profile-btn {
-          width: 44px; height: 44px; border-radius: 50%;
+          width: 40px; height: 40px; border-radius: 50%;
           background: linear-gradient(135deg, #ff6b6b, #ff8e53);
           border: none; cursor: pointer;
           display: flex; align-items: center; justify-content: center;
-          font-size: 16px; font-weight: 800; color: white;
+          font-size: 15px; font-weight: 800; color: white;
           box-shadow: 0 3px 10px rgba(255,107,107,0.3);
           transition: transform 0.15s, box-shadow 0.15s;
           font-family: 'DM Sans', sans-serif; flex-shrink: 0;
         }
+        @media (min-width: 640px) {
+          .profile-btn { width: 44px; height: 44px; font-size: 16px; }
+        }
         .profile-btn:hover { transform: scale(1.08); box-shadow: 0 5px 16px rgba(255,107,107,0.4); }
 
         .theme-toggle {
-          width: 44px; height: 44px; border-radius: 50%;
+          width: 40px; height: 40px; border-radius: 50%;
           border: none; cursor: pointer; flex-shrink: 0;
           display: flex; align-items: center; justify-content: center;
-          font-size: 18px;
+          font-size: 17px;
           transition: transform 0.2s, background 0.25s;
+        }
+        @media (min-width: 640px) {
+          .theme-toggle { width: 44px; height: 44px; font-size: 18px; }
         }
         .theme-toggle:hover { transform: rotate(20deg) scale(1.1); }
 
         .cart-btn {
-          width: 44px; height: 44px; border-radius: 14px;
+          width: 40px; height: 40px; border-radius: 12px;
           display: flex; align-items: center; justify-content: center;
-          font-size: 18px; transition: transform 0.15s;
+          font-size: 17px; transition: transform 0.15s;
           text-decoration: none;
         }
-        .cart-btn:hover { transform: scale(1.08); }
+        @media (min-width: 640px) {
+          .cart-btn { width: 44px; height: 44px; border-radius: 14px; font-size: 18px; }
+        }
       `}</style>
 
       <div className="navbar-root sticky top-4 z-50" ref={mobileRef}>
-        <div className="max-w-[1240px] mx-auto px-3">
+        <div className="max-w-[1260px] mx-auto px-2 sm:px-3">
           <div
             className="flex items-center justify-between rounded-2xl transition-all duration-300"
             style={{
@@ -165,7 +173,7 @@ const Navbar = () => {
               border: `1.5px solid ${nb.border}`,
               boxShadow: nb.shadow,
               // ↓ Taller padding — shrinks slightly on scroll
-              padding: scrolled ? "14px 28px" : "20px 28px",
+              padding: scrolled ? "14px 18px" : "18px 18px",
             }}
           >
             {/* ── Logo ── */}
@@ -176,7 +184,7 @@ const Navbar = () => {
                 className="object-contain transition-all duration-300"
                 style={{
                   // ↓ Bigger logo to fill the taller bar
-                  width: scrolled ? "110px" : "140px",
+                  width: scrolled ? "100px" : "120px",
                   filter: dark ? "brightness(0) invert(1)" : "none",
                 }}
               />
@@ -255,7 +263,7 @@ const Navbar = () => {
             </nav>
 
             {/* ── Right Actions ── */}
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-1 sm:gap-3">
               {/* Hamburger — mobile only */}
               <button
                 className="md:hidden flex flex-col justify-center items-center w-10 h-10 rounded-xl transition-all"
@@ -338,7 +346,7 @@ const Navbar = () => {
               {!isAuthenticated && (
                 <Link
                   to="/login"
-                  className="text-sm font-bold px-6 py-3 rounded-xl transition-all"
+                  className="text-sm font-bold px-3 py-2 sm:px-6 sm:py-3 rounded-xl transition-all hidden sm:inline-flex"
                   style={{
                     background: "linear-gradient(135deg,#ff6b6b,#ff4757)",
                     color: "white",
@@ -471,165 +479,165 @@ const Navbar = () => {
             </div>
           </div>
         </div>
-      </div>
 
-      {/* ── Mobile Drawer ── */}
-      {mobileOpen && (
-        <div
-          className="md:hidden navbar-root drop-in"
-          style={{
-            position: "fixed",
-            top: scrolled ? "74px" : "90px",
-            left: "12px",
-            right: "12px",
-            zIndex: 49,
-            borderRadius: "16px",
-            padding: "12px 16px",
-            background: nb.dropBg,
-            backdropFilter: "blur(32px) saturate(180%)",
-            WebkitBackdropFilter: "blur(32px) saturate(180%)",
-            border: `1.5px solid ${nb.dropBorder}`,
-            boxShadow: nb.dropShadow,
-            transition: "top 0.3s",
-          }}
-        >
-          {/* User / guest nav */}
-          {(!isAuthenticated || role === "user") && (
-            <>
-              <MobileNavLink
-                to="/user"
-                dark={dark}
-                onClick={() => setMobileOpen(false)}
-              >
-                🏠 &nbsp;Home
-              </MobileNavLink>
-              <MobileNavLink
-                to="/contact"
-                dark={dark}
-                onClick={() => setMobileOpen(false)}
-              >
-                📬 &nbsp;Contact Us
-              </MobileNavLink>
-            </>
-          )}
+        {/* ── Mobile Drawer (inside mobileRef so outside-click works) ── */}
+        {mobileOpen && (
+          <div
+            className="md:hidden navbar-root drop-in"
+            style={{
+              position: "absolute",
+              top: scrolled ? "calc(100% - 8px)" : "calc(100% - 8px)",
+              left: "0",
+              right: "0",
+              zIndex: 49,
+              borderRadius: "16px",
+              padding: "12px 16px",
+              background: nb.dropBg,
+              backdropFilter: "blur(32px) saturate(180%)",
+              WebkitBackdropFilter: "blur(32px) saturate(180%)",
+              border: `1.5px solid ${nb.dropBorder}`,
+              boxShadow: nb.dropShadow,
+              marginTop: "8px",
+            }}
+          >
+            {/* User / guest nav */}
+            {(!isAuthenticated || role === "user") && (
+              <>
+                <MobileNavLink
+                  to="/user"
+                  dark={dark}
+                  onClick={() => setMobileOpen(false)}
+                >
+                  🏠 &nbsp;Home
+                </MobileNavLink>
+                <MobileNavLink
+                  to="/contact"
+                  dark={dark}
+                  onClick={() => setMobileOpen(false)}
+                >
+                  📬 &nbsp;Contact Us
+                </MobileNavLink>
+              </>
+            )}
 
-          {/* Owner nav */}
-          {isAuthenticated && role === "restaurantOwner" && (
-            <>
-              <MobileNavLink
-                to="/owner"
-                dark={dark}
-                onClick={() => setMobileOpen(false)}
-              >
-                📊 &nbsp;Dashboard
-              </MobileNavLink>
-              <MobileNavLink
-                to="/owner/restaurant"
-                dark={dark}
-                onClick={() => setMobileOpen(false)}
-              >
-                🍽️ &nbsp;My Restaurant
-              </MobileNavLink>
-              <MobileNavLink
-                to="/owner/orders"
-                dark={dark}
-                onClick={() => setMobileOpen(false)}
-              >
-                📦 &nbsp;Orders
-              </MobileNavLink>
-              <MobileNavLink
-                to="/owner/profile"
-                dark={dark}
-                onClick={() => setMobileOpen(false)}
-              >
-                👤 &nbsp;Profile
-              </MobileNavLink>
-            </>
-          )}
+            {/* Owner nav */}
+            {isAuthenticated && role === "restaurantOwner" && (
+              <>
+                <MobileNavLink
+                  to="/owner"
+                  dark={dark}
+                  onClick={() => setMobileOpen(false)}
+                >
+                  📊 &nbsp;Dashboard
+                </MobileNavLink>
+                <MobileNavLink
+                  to="/owner/restaurant"
+                  dark={dark}
+                  onClick={() => setMobileOpen(false)}
+                >
+                  🍽️ &nbsp;My Restaurant
+                </MobileNavLink>
+                <MobileNavLink
+                  to="/owner/orders"
+                  dark={dark}
+                  onClick={() => setMobileOpen(false)}
+                >
+                  📦 &nbsp;Orders
+                </MobileNavLink>
+                <MobileNavLink
+                  to="/owner/profile"
+                  dark={dark}
+                  onClick={() => setMobileOpen(false)}
+                >
+                  👤 &nbsp;Profile
+                </MobileNavLink>
+              </>
+            )}
 
-          {/* Admin nav */}
-          {isAuthenticated && role === "admin" && (
-            <>
-              <MobileNavLink
-                to="/admin/dashboard"
-                dark={dark}
-                onClick={() => setMobileOpen(false)}
-              >
-                📊 &nbsp;Dashboard
-              </MobileNavLink>
-              <MobileNavLink
-                to="/admin/restaurants"
-                dark={dark}
-                onClick={() => setMobileOpen(false)}
-              >
-                🍴 &nbsp;Restaurants
-              </MobileNavLink>
-              <MobileNavLink
-                to="/admin/owners"
-                dark={dark}
-                onClick={() => setMobileOpen(false)}
-              >
-                🏪 &nbsp;Owners
-              </MobileNavLink>
-              <MobileNavLink
-                to="/admin/orders"
-                dark={dark}
-                onClick={() => setMobileOpen(false)}
-              >
-                📦 &nbsp;Orders
-              </MobileNavLink>
-              <MobileNavLink
-                to="/admin/users"
-                dark={dark}
-                onClick={() => setMobileOpen(false)}
-              >
-                👥 &nbsp;Users
-              </MobileNavLink>
-            </>
-          )}
+            {/* Admin nav */}
+            {isAuthenticated && role === "admin" && (
+              <>
+                <MobileNavLink
+                  to="/admin/dashboard"
+                  dark={dark}
+                  onClick={() => setMobileOpen(false)}
+                >
+                  📊 &nbsp;Dashboard
+                </MobileNavLink>
+                <MobileNavLink
+                  to="/admin/restaurants"
+                  dark={dark}
+                  onClick={() => setMobileOpen(false)}
+                >
+                  🍴 &nbsp;Restaurants
+                </MobileNavLink>
+                <MobileNavLink
+                  to="/admin/owners"
+                  dark={dark}
+                  onClick={() => setMobileOpen(false)}
+                >
+                  🏪 &nbsp;Owners
+                </MobileNavLink>
+                <MobileNavLink
+                  to="/admin/orders"
+                  dark={dark}
+                  onClick={() => setMobileOpen(false)}
+                >
+                  📦 &nbsp;Orders
+                </MobileNavLink>
+                <MobileNavLink
+                  to="/admin/users"
+                  dark={dark}
+                  onClick={() => setMobileOpen(false)}
+                >
+                  👥 &nbsp;Users
+                </MobileNavLink>
+              </>
+            )}
 
-          {/* Divider + logout if authenticated */}
-          {isAuthenticated && (
-            <div
-              style={{
-                borderTop: `1px solid ${nb.divider}`,
-                marginTop: 6,
-                paddingTop: 6,
-              }}
-            >
-              <DropItem
-                dark={dark}
-                danger
-                onClick={() => {
-                  setMobileOpen(false);
-                  handleLogout();
+            {/* Divider + logout if authenticated */}
+            {isAuthenticated && (
+              <div
+                style={{
+                  borderTop: `1px solid ${nb.divider}`,
+                  marginTop: 6,
+                  paddingTop: 6,
                 }}
               >
-                🚪 &nbsp;Logout
-              </DropItem>
-            </div>
-          )}
+                <DropItem
+                  dark={dark}
+                  danger
+                  onClick={() => {
+                    setMobileOpen(false);
+                    handleLogout();
+                  }}
+                >
+                  🚪 &nbsp;Logout
+                </DropItem>
+              </div>
+            )}
 
-          {/* Login if guest */}
-          {!isAuthenticated && (
-            <div
-              style={{
-                borderTop: `1px solid ${nb.divider}`,
-                marginTop: 6,
-                paddingTop: 6,
-              }}
-            >
-              <MobileNavLink
-                to="/login"
-                dark={dark}
-                onClick={() => setMobileOpen(false)}
+            {/* Login if guest */}
+            {!isAuthenticated && (
+              <div
+                style={{
+                  borderTop: `1px solid ${nb.divider}`,
+                  marginTop: 6,
+                  paddingTop: 6,
+                }}
               >
-                🔑 &nbsp;Login
-              </MobileNavLink>
-            </div>
-          )}
-        </div>
-      )}
+                <MobileNavLink
+                  to="/login"
+                  dark={dark}
+                  onClick={() => setMobileOpen(false)}
+                >
+                  🔑 &nbsp;Login
+                </MobileNavLink>
+              </div>
+            )}
+          </div>
+        )}
+      </div>
     </>
   );
 };

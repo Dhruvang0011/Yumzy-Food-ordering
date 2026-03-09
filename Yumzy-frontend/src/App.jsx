@@ -32,6 +32,7 @@ import OwnerProfile from "./pages/OwnerProfile";
 function App() {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(true);
+  const isDark = localStorage.getItem("yumzy-theme") === "dark";
 
   useEffect(() => {
     const checkAuth = async () => {
@@ -55,7 +56,59 @@ function App() {
     checkAuth();
   }, []);
 
-  if (loading) return <div>Loading...</div>;
+  if (loading)
+    return (
+      <div
+        style={{
+          minHeight: "100vh",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          fontFamily: "'DM Sans', sans-serif",
+          background: isDark ? "rgba(18,13,11,0.92)" : "transparent",
+        }}
+      >
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            gap: 16,
+          }}
+        >
+          <div
+            style={{
+              width: 56,
+              height: 56,
+              borderRadius: 16,
+              background: "linear-gradient(135deg,#ff6b6b,#ff4757)",
+              boxShadow: "0 6px 20px rgba(255,107,107,0.35)",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              fontSize: 26,
+              animation: "pulse 1.4s ease-in-out infinite",
+            }}
+          >
+            🍽️
+          </div>
+          <p
+            style={{
+              margin: 0,
+              fontSize: 14,
+              fontWeight: 600,
+              color: "#9ca3af",
+            }}
+          >
+            Preparing your meal…
+          </p>
+        </div>
+        <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@600&display=swap');
+        @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.45} }
+      `}</style>
+      </div>
+    );
 
   return (
     <>

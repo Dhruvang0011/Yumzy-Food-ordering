@@ -176,7 +176,7 @@ const Home = () => {
 
   return (
     <div
-      className="min-h-screen pt-3  transition-colors duration-300"
+      className="min-h-screen pt-3  transition-colors duration-300 mx-1"
       style={{ fontFamily: "'DM Sans', sans-serif" }}
     >
       <style>{`
