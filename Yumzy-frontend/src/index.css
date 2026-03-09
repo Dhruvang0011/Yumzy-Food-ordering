@@ -1,0 +1,17 @@
+@import "tailwindcss";
+@variant dark (&:where(.dark, .dark *));
+
+/* For Chrome, Edge, Safari */
+::-webkit-scrollbar {
+  display: none;
+}
+
+/* For Firefox */
+html {
+  scrollbar-width: none;
+}
+
+/* For IE & Edge */
+body {
+  -ms-overflow-style: none;
+}
