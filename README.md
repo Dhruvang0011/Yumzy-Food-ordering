@@ -17,7 +17,7 @@ Yumzy is a full-stack **MERN-based food ordering web application** with **multi-
 
 * React (Vite)
 * Axios
-* Tailwind CSS (if used)
+* Tailwind CSS
 
 ### Backend
 
