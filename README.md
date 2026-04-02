@@ -1,4 +1,4 @@
-# 🍽️ Yumzy – Food Ordering Platform
+# 🍔 Yumzy – Food Ordering Platform
 
 Yumzy is a full-stack **MERN-based food ordering web application** with **multi-role support** including **User, Admin, and Restaurant Owner dashboards**.
 
