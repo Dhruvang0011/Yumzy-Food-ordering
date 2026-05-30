@@ -7,11 +7,20 @@ const jwt = require("jsonwebtoken");
 // 🔹 Register User
 const registerUser = async (req, res) => {
   try {
-    const { name, email, password, phone, address } = req.body;
-  
+    const {
+      name,
+      email,
+      password,
+      phone,
+      address,
+    } = req.body;
+
     const existingUser = await User.findOne({ email });
+
     if (existingUser) {
-      return res.status(400).json({ message: "User already exists" });
+      return res.status(400).json({
+        message: "User already exists",
+      });
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -22,26 +31,130 @@ const registerUser = async (req, res) => {
       password: hashedPassword,
       phone,
       address,
-      role: "user"
+      role: "user",
+
+      providers: [
+        {
+          provider: "local",
+          providerId: email,
+        },
+      ],
+    });
+
+    const token = jwt.sign(
+      {
+        id: user._id,
+        role: user.role,
+      },
+      process.env.JWT_SECRET,
+      {
+        expiresIn: "7d",
+      }
+    );
+
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: true,
+      sameSite: "None",
+      maxAge: 7 * 24 * 60 * 60 * 1000,
     });
 
     res.status(201).json({
       message: "User registered successfully",
-      user: {
-        _id: user._id,
-        name: user.name,
-        email: user.email,
-        phone:user.phone,
-        address : user.address,
-        role: user.role
-        }
+      user,
     });
 
   } catch (error) {
-  res.status(500).json({
-    message: "Registration failed",
-    error: error.message
-  });
+    res.status(500).json({
+      message: error.message,
+    });
+  }
+};
+
+//OAuth 
+const oauthLogin = async (req, res) => {
+  try {
+    const {
+      name,
+      email,
+      provider,
+      providerId,
+      phone,
+      address,
+    } = req.body;
+
+    if (!provider || !providerId) {
+      return res.status(400).json({
+        message: "Provider details are required",
+      });
+    }
+
+    let user = await User.findOne({ email });
+
+    // Existing User
+    if (user) {
+
+      const providerExists = user.providers.some(
+        (p) =>
+          p.provider === provider &&
+          p.providerId === providerId
+      );
+
+      if (!providerExists) {
+        user.providers.push({
+          provider,
+          providerId,
+        });
+
+        await user.save();
+      }
+    }
+
+    // New User
+    else {
+      user = await User.create({
+        name,
+        email,
+        phone: phone || "",
+        address: address || "",
+        role: "user",
+
+        providers: [
+          {
+            provider,
+            providerId,
+          },
+        ],
+      });
+    }
+
+    const token = jwt.sign(
+      {
+        id: user._id,
+        role: user.role,
+      },
+      process.env.JWT_SECRET,
+      {
+        expiresIn: "7d",
+      }
+    );
+
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: true,
+      sameSite: "None",
+      maxAge: 7 * 24 * 60 * 60 * 1000,
+    });
+
+    res.status(200).json({
+      message: "Login successful",
+      user,
+    });
+
+  } catch (error) {
+    res.status(500).json({
+      message: error.message,
+    });
   }
 };
 
@@ -190,4 +303,4 @@ const updateownerProfile = async(req,res) => {
   }
 }
 
-module.exports = { registerUser, loginUser,updateUser,logoutUser,getUser,getownerProfile,updateownerProfile };
+module.exports = { registerUser, loginUser,updateUser,logoutUser,getUser,getownerProfile,updateownerProfile,oauthLogin };

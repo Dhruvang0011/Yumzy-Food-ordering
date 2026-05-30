@@ -6,10 +6,12 @@ const {
   getUser,
   updateUser,
   loginUser,
-  logoutUser
+  logoutUser,
+  oauthLogin
 } = require("../controllers/userController");
 
 router.post("/register", registerUser);
+router.post("/oauth", oauthLogin);
 
 router.get("/profile",
   authenticateUser,

@@ -14,17 +14,30 @@ const userSchema = new mongoose.Schema(
       unique: true,
       lowercase: true,
       trim: true,
-      match: [/^\S+@\S+\.\S+$/, "Please enter a valid email"],
     },
 
     password: {
       type: String,
-      required: true,
       minlength: 6,
-      select: false, // 🔥 never return password in queries
+      select: false,
     },
 
+    providers: [
+      {
+        provider: {
+          type: String,
+          enum: ["local", "google", "github", "facebook"],
+          required: true,
+        },
+        providerId: {
+          type: String,
+          required: true,
+        },
+      },
+    ],
+
     phone: String,
+
     address: String,
 
     role: {
@@ -36,7 +49,7 @@ const userSchema = new mongoose.Schema(
     restaurant: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Restaurant",
-      default: null
+      default: null,
     },
   },
   { timestamps: true }
